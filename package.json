@@ -15,9 +15,9 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-pino-logger": "^3.0.1",
+    "fs-plus": "^3.0.1",
     "lodash": "^4.17.4",
-    "moment": "^2.19.4",
-    "reify": "^0.13.2"
+    "moment": "^2.19.4"
   },
   "devDependencies": {
     "nodemon": "^1.12.5",

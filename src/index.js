@@ -1,10 +1,11 @@
-import express from 'express'
-import cors from 'cors'
-import compression from 'compression'
-import pino from 'express-pino-logger'
-import bodyParser from 'body-parser'
+const express = require('express')
+const cors = require('cors')
+const compression = require('compression')
+const pino = require('express-pino-logger')
+const bodyParser = require('body-parser')
 
-import attachRoutes from './api'
+
+const useRoutes = require('./api')
 
 const server = express()
 const router = express.Router()
@@ -18,7 +19,9 @@ server.use(pino())
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
 
-attachRoutes({ router })
+useRoutes({ router })
+
+server.use('/api', router)
 
 server.listen(PORT, function () {
   console.log(`listening on port ${PORT}`)
