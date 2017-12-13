@@ -8,8 +8,7 @@ const attachRouter = ({ router }) => dir => {
   if (!fs.isDirectorySync(endpoint))
     return
 
-  const route = require(endpoint)
-  route({ router })
+  require(endpoint)({ router })
 }
 
 module.exports = function ({ router }) {
