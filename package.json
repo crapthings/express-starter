@@ -1,0 +1,27 @@
+{
+  "name": "express-starter",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "crapthings",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "axios": "^0.26.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
+    "nodemon": "^2.0.15"
+  }
+}
