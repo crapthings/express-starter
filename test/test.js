@@ -7,14 +7,28 @@ const FormData = require('form-data')
 
 const API = `http://localhost:3000/api/v1`
 
-// require('../index')
-
 describe('test api', function () {
+  const TEST_MESSAGE = 'test redis'
 
   describe('test dev api', function () {
     it('test /status should response with OK', async function () {
       const { data } = await axios.get(`${API}/status`)
       expect(data).to.be.equal('OK')
+    })
+
+    it('test /mongo/health should response with message', async function () {
+      const { data } = await axios.get(`${API}/mongo/health`)
+      expect(data?.result?.ok).to.be.equal(1)
+    })
+
+    it('test /redis/set should response with OK', async function () {
+      const { data } = await axios.post(`${API}/redis/set`, { message: TEST_MESSAGE })
+      expect(data).to.be.equal('OK')
+    })
+
+    it('test /redis/get should response with message "test redis"', async function () {
+      const { data } = await axios.get(`${API}/redis/get`)
+      expect(data?.result?.message).to.be.equal(TEST_MESSAGE)
     })
   })
 
@@ -31,5 +45,4 @@ describe('test api', function () {
       expect(test).to.be.equal(true)
     })
   })
-
 })

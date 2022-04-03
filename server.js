@@ -5,6 +5,10 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const pino = require('pino-http')()
+
+const mongo = require('./db/mongodb')
+const redis = require('./db/redis')
+
 // constants
 
 const PORT = process.env.PORT || 3000
@@ -24,7 +28,11 @@ server.use(bodyParser.json())
 // register api
 
 for (const api of fs.readdirSync('./api')) {
-  server.use('/api/v1', require(`./api/${api}`)({ router }))
+  server.use('/api/v1', require(`./api/${api}`)({
+    router,
+    mongo,
+    redis,
+  }))
 }
 
 // serve
