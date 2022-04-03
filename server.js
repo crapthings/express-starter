@@ -4,6 +4,7 @@ const path = require('path')
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const pino = require('pino-http')()
 // constants
 
 const PORT = process.env.PORT || 3000
@@ -18,6 +19,7 @@ const router = express.Router()
 server.use(cors())
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
+// server.use(pino)
 
 // register api
 
