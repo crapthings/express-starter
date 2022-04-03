@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const http = require('http')
 
 const express = require('express')
 const cors = require('cors')
@@ -17,6 +18,11 @@ const PORT = process.env.PORT || 3000
 
 const server = express()
 const router = express.Router()
+const httpServer = http.Server(server)
+
+// ws
+
+require('./ws')({ httpServer })
 
 // middlewares
 
@@ -37,6 +43,6 @@ for (const api of fs.readdirSync('./api')) {
 
 // serve
 
-server.listen(PORT, function () {
+httpServer.listen(PORT, function () {
   console.log(`server is running on port ${PORT}`)
 })
