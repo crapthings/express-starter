@@ -1,7 +1,5 @@
-module.exports = function ({ httpServer, ...deps }) {
-  const io = require('socket.io')(httpServer)
-
-  io.on('connection', function (socket) {
+module.exports = function ({ ws, ...deps }) {
+  ws.on('connection', function (socket) {
     console.log('A user connected')
     socket.emit('test', true)
 

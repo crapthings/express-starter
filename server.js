@@ -6,7 +6,9 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const pino = require('pino-http')()
+const io = require('socket.io')
 
+const wsServer = require('./wsServer')
 const mongo = require('./db/mongodb')
 const redis = require('./db/redis')
 
@@ -19,10 +21,7 @@ const PORT = process.env.PORT || 3000
 const server = express()
 const router = express.Router()
 const httpServer = http.Server(server)
-
-// ws
-
-require('./ws')({ httpServer })
+const ws = io(httpServer)
 
 // middlewares
 
@@ -45,4 +44,12 @@ for (const api of fs.readdirSync('./api')) {
 
 httpServer.listen(PORT, function () {
   console.log(`server is running on port ${PORT}`)
+})
+
+// ws
+
+wsServer({
+  ws,
+  mongo,
+  redis,
 })
