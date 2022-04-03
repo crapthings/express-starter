@@ -30,6 +30,10 @@ server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
 // server.use(pino)
 
+app.use(function (err, req, res, next) {
+  next()
+})
+
 // register api
 
 for (const api of fs.readdirSync('./api')) {

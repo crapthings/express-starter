@@ -19,3 +19,8 @@ npm run dev
 ```bash
 npm run test
 ```
+
+### TODO
+
+- https://github.com/validatorjs/validator.js
+- https://github.com/sideway/joi
