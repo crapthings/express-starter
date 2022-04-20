@@ -30,14 +30,14 @@ server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
 // server.use(pino)
 
-app.use(function (err, req, res, next) {
+server.use(function (err, req, res, next) {
   next()
 })
 
 // register api
 
 for (const api of fs.readdirSync('./api')) {
-  server.use('/api/v1', require(`./api/${api}`)({
+  server.use(`/api/v1/${api}`, require(`./api/${api}`)({
     router,
     mongo,
     redis,

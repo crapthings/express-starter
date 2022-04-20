@@ -23,22 +23,22 @@ describe('test api', function () {
 
   describe('test dev api', function () {
     it('test /status should response with OK', async function () {
-      const { data } = await axios.get(`${API}/status`)
+      const { data } = await axios.get(`${API}/dev/status`)
       expect(data).to.be.equal('OK')
     })
 
     it('test /mongo/health should response with message', async function () {
-      const { data } = await axios.get(`${API}/mongo/health`)
+      const { data } = await axios.get(`${API}/dev/mongo/health`)
       expect(data?.result?.ok).to.be.equal(1)
     })
 
     it('test /redis/set should response with OK', async function () {
-      const { data } = await axios.post(`${API}/redis/set`, { message: TEST_MESSAGE })
+      const { data } = await axios.post(`${API}/dev/redis/set`, { message: TEST_MESSAGE })
       expect(data).to.be.equal('OK')
     })
 
     it('test /redis/get should response with message "test redis"', async function () {
-      const { data } = await axios.get(`${API}/redis/get`)
+      const { data } = await axios.get(`${API}/dev/redis/get`)
       expect(data?.result?.message).to.be.equal(TEST_MESSAGE)
     })
   })
@@ -49,7 +49,7 @@ describe('test api', function () {
 
       form.append('file', JSON.stringify({ test: true }), 'test.json')
 
-      const { data } = await axios.post(`${API}/upload`, form, { headers: { ...form.getHeaders() } })
+      const { data } = await axios.post(`${API}/upload/upload`, form, { headers: { ...form.getHeaders() } })
 
       const { test } = JSON.parse(await readFile(data[0].path, 'utf-8'))
 
