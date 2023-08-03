@@ -18,7 +18,9 @@ module.exports = function ({ router, mongo, redis, ...deps }) {
   })
 
   router.post('/redis/set', async function (req, res) {
-    res.sendStatus(await redis.set('message', req.body.message))
+    const result = await redis.set('message', req.body.message)
+
+    res.sendStatus(200)
   })
 
   return router
