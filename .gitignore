@@ -4,3 +4,4 @@ node_modules
 uploads/*
 !uploads/.gitkeep
 !uploads/test.json
+package-lock.json
