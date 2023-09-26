@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 
-const uri = 'mongodb://localhost:27017/?maxPoolSize=20&w=majority'
+const uri = process.env.MONGO_URL
 
 const mongo = new MongoClient(uri)
 

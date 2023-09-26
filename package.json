@@ -11,27 +11,31 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "axios": "^1.4.0",
+    "aedes": "^0.50.0",
+    "aedes-server-factory": "^0.2.1",
+    "axios": "^1.5.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
-    "dayjs": "^1.11.9",
+    "dayjs": "^1.11.10",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "form-data": "^4.0.0",
     "ioredis": "^5.3.2",
     "lodash": "^4.17.21",
-    "mongodb": "^5.7.0",
+    "mongodb": "^6.1.0",
+    "mqtt": "^5.0.5",
     "multer": "^1.4.4",
     "mysql": "^2.18.1",
     "nanoid": "^3.3.6",
-    "pino-http": "^8.3.3",
-    "sequelize": "^6.32.1",
+    "pino-http": "^8.5.0",
+    "sequelize": "^6.33.0",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
-    "chai": "^4.3.7",
+    "chai": "^4.3.8",
     "mocha": "^10.2.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "standard": "^17.1.0"
   }
 }

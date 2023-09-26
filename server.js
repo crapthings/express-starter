@@ -6,22 +6,25 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const pino = require('pino-http')()
-const io = require('socket.io')
+const socket = require('socket.io')
 
-const wsServer = require('./wsServer')
 const mongo = require('./db/mongodb')
 const redis = require('./db/redis')
+const ioServer = require('./io-server')
+const mqttServer = require('./mqtt-server')
+const mqttClient = require('./mqtt-client')
 
 // constants
 
 const PORT = process.env.PORT || 3000
+const API_PATH = './api'
 
 // init
 
 const server = express()
 const router = express.Router()
 const httpServer = http.Server(server)
-const ws = io(httpServer)
+const io = socket(httpServer)
 
 // middlewares
 
@@ -36,24 +39,44 @@ server.use(function (err, req, res, next) {
 
 // register api
 
-for (const api of fs.readdirSync('./api')) {
-  server.use(`/api/v1/${api}`, require(`./api/${api}`)({
-    router,
-    mongo,
-    redis,
-  }))
+for (const api of fs.readdirSync(API_PATH)) {
+  const stats = fs.statSync(path.resolve(API_PATH, api))
+
+  if (stats.isFile()) {
+    server.use(`/api/v1`, require(`${API_PATH}/${api}`)({
+      router,
+      mongo,
+      redis,
+      mqttClient,
+    }))
+  } else {
+    server.use(`/api/v1/${api}`, require(`${API_PATH}/${api}`)({
+      router,
+      mongo,
+      redis,
+      mqttClient,
+    }))
+  }
 }
 
 // serve
 
 httpServer.listen(PORT, function () {
-  console.log(`server is running on port ${PORT}`)
+  console.log(`server is running on port`, PORT)
 })
 
 // ws
 
-wsServer({
-  ws,
+ioServer({
+  io,
   mongo,
   redis,
+})
+
+// mqtt
+
+mqttServer({
+  mongo,
+  redis,
+  mqttClient,
 })
